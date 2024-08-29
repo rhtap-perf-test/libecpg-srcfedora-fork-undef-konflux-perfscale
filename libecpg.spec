@@ -2,8 +2,8 @@
 
 Summary: ECPG - Embedded SQL in C
 Name: libecpg
-Version: %majorversion.3
-Release: 2%{?dist}
+Version: %majorversion.4
+Release: 1%{?dist}
 
 License: PostgreSQL
 Url: http://www.postgresql.org/
@@ -81,7 +81,7 @@ find . -type f -name .gitignore | xargs rm
     --without-readline \
     --datadir=%_datadir/pgsql
 
-%make_build -C "src/interfaces/ecpg"
+%make_build -C "src/interfaces/ecpg" -j1
 
 
 %install
@@ -132,6 +132,11 @@ find_lang_bins %name-devel.lst  ecpg
 
 
 %changelog
+* Thu Aug 29 2024 Ales Nezbeda <anezbeda@redhat.com> - 16.4-1
+- Update to 16.4
+- Fix compilation sometimes failing due to race condition in makefile
+- Resolves: BZ:2290330
+
 * Thu Jul 18 2024 Fedora Release Engineering <releng@fedoraproject.org> - 16.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 
